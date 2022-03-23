@@ -2,7 +2,7 @@ import React from 'react'
 
 function Header({title, sub }) {
   return (
-    <h1 class="title">
+    <h1 className="title">
     {title}
     <span>{sub}</span>
   </h1>

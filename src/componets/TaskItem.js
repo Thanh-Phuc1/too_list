@@ -2,10 +2,10 @@ import React from 'react'
 
 function TaskItem({task, setTaskStartus, removeTask}) {
   return (
-    <li id="{task.id}" className={task.status ? "done" : ""}>
-        <span class="label">{task.title}</span>
-        <div class="actions">
-          <input type="checkbox" class="btn-action btn-action-done"  checked = {Boolean(task.status)}
+    <li key="{task.id}" className={task.status ? "done" : ""}>
+        <span className="label">{task.title}</span>
+        <div className="actions">
+          <input type="checkbox" className="btn-action btn-action-done"  checked = {Boolean(task.status)}
           onChange = {(e) => setTaskStartus(task.id, e.target.checked)}
           
           

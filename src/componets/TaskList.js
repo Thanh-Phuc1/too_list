@@ -11,7 +11,7 @@ function TaskList({tasks, showIncomplete, setTaskStartus, removeTask, handleShow
   ))}
   </ul>
    <div className="togglebutton-wrapper">
-   <label for="filter" class="togglebutton-label">
+   <label htmlFor="filter" class="togglebutton-label">
      Show incompleted tasks only
    </label>
    <input id="filter" type="checkbox" checked= {showIncomplete} onChange= {handleShowIn} />

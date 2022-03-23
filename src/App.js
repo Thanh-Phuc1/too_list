@@ -1,61 +1,106 @@
 
 import React, {useState} from "react";
-import AddForm from "./AddForm";
+// import AddForm from "./AddForm";
 import './App.css';
-import Header from "./componets/Header";
-import TaskList from "./componets/TaskList";
+// import Header from "./componets/Header";
+// import TaskList from "./componets/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState([
-    {id:"task1", title: "Learn JS", status: 1},
-    {id:"task2",  title: "Code a Todo List", status: 0}, ]);
-  const [showIncomplete, setShowIncomplete] = useState(false);
+    { id: "task_1", title: "Learn JS", status: 0 },
+    { id: "task_2", title: "Code a Todo List", status: 0 },
+  ]);
 
-  const [newTask, setNewTask] = useState("123");
-  //handle submit
+  const [showIncomplete, setShowIncomplete] = useState(false);
+  const [newTask, setNewTask] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const task = {
-      id: Date.now(),
-      title: newTask,
-      status: 0,
-    };
-    setTasks([...tasks, task]);
-    setNewTask("")
-  }
+    if (newTask) {
+      const task = {
+        id: Date.now(),
+        title: newTask,
+        status: 0,
+      };
+      setTasks([...tasks, task]);
+      setNewTask("");
+    }
+  };
+
   const handleInputChange = (e) => {
     setNewTask(e.target.value);
-  }
-const handleShowIn = (e) =>{
-  setShowIncomplete(e.target.checked);
-}
+  };
 
-const setTaskStartus = (taskId, status) =>{
-  setTasks(
-    tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, status: status ? 1 : 0};
-      }
-    })
-  )
-};
-const removeTask = (taskId) => {
-  setTasks(tasks.filter((task) => task.id !== taskId ));
-};
+  const setTaskStatus = (taskId, status) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, status: status ? 1 : 0 };
+        }
+        return task;
+      })
+    );
+  };
 
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
 
-return (
-  <div class="project-container">
-    <Header title="Todo List" sub="Get things done, one item at a time."/>
-  <TaskList tasks={tasks} showIncomplete={setShowIncomplete} setTaskStartus={setTaskStartus} removeTask={removeTask} 
-  
-  />
- 
- <AddForm handleInputChange={handleInputChange} handleSubmit={handleSubmit} newTask={newTask} />
-</div>
-
-);
-
+  return (
+    <div className="App">
+      <div className="container">
+        <h1 className="title">
+          Todo List
+          <span>Get one item done at a time.</span>
+        </h1>
+        <ul className="task-list">
+          {tasks
+            .filter((task) => (showIncomplete ? task.status !== 1 : true))
+            .map((task) => (
+              <li key={task.id} className={task.status ? "done" : ""}>
+                <span className="label"> {task.title}</span>
+                <div className="action">
+                  <input
+                    type="checkbox"
+                    className="btn-action btn-action-done"
+                    checked={Boolean(task.status)}
+                    onChange={(e) => setTaskStatus(task.id, e.target.checked)}
+                  />
+                  <button
+                    className="btn-action btn-action-delete"
+                    onClick={() => removeTask(task.id)}
+                  >
+                    ✘
+                  </button>
+                </div>
+              </li>
+            ))}
+        </ul>
+        <div className="filter-wrapper">
+          <label htmlFor="filter" className="filter-label">
+            {" "}
+            Show incompleted tasks only
+          </label>
+          <input
+            type="checkbox"
+            id="filter"
+            checked={showIncomplete}
+            onChange={(e) => setShowIncomplete(e.target.checked)}
+          />
+        </div>
+        <form onSubmit={handleSubmit} action="#" className="form">
+          <label htmlFor="newitem">Add to the todo list</label>
+          <input
+            type="text"
+            id="newitem"
+            value={newTask}
+            onChange={handleInputChange}
+          />
+          <button type="submit">add item</button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default App;

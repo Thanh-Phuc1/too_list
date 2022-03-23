@@ -1,28 +1,24 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 *,
-*::after,
-*::before {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-}
-
-body {
-  font-family: "DM Sans", sans-serif;
-  background-color: #f3f6fd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.project-container {
+.container {
   font-family: "DM Sans", sans-serif;
   margin: 4rem auto;
   padding: 2rem 3rem 3rem;
@@ -46,7 +42,6 @@ body {
   margin-left: 3px;
   margin-top: 0.2rem;
 }
-
 .task-list {
   margin-top: 2.6rem;
   list-style: none;
@@ -62,24 +57,13 @@ body {
   transition: all 0.5s ease;
   transform-origin: top left;
 }
-
 .fall {
   transform: rotate(10deg);
   opacity: 0;
 }
-
 .task-list .actions {
   flex-shrink: 0;
-  padding-left: 0.7em;
-}
-
-.task-list .label {
-  transition: opacity 0.2s linear;
-}
-
-.task-list .done .label {
-  opacity: 0.6;
-  text-decoration: line-through;
+  padding-left: 0.7rem;
 }
 
 .task-list .btn-action {
@@ -95,16 +79,24 @@ input[type="checkbox"] {
   height: 1.2rem;
 }
 
-.task-list input[type="checkbox"] {
+.tasklist input[type="checkbox"] {
   position: relative;
   top: 0.3rem;
 }
 
-/* TOOGLE COMPONENT */
-.togglebutton-wrapper {
-  margin-top: 1em;
+.task-list .label {
+  transition: opacity 0.2s linear;
+}
+
+.task-list .done .label {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.filter-wrapper {
   display: flex;
   justify-content: flex-end;
+  margin-top: 1em;
 }
 
 .form {
@@ -112,13 +104,11 @@ input[type="checkbox"] {
   display: flex;
   flex-wrap: wrap;
 }
-
 .form label {
   min-width: 100%;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
-
 .form input {
   flex-grow: 1;
   border: none;
@@ -139,9 +129,11 @@ input[type="checkbox"] {
   cursor: pointer;
   transition: background 0.2s ease-out;
 }
+
 .form button:hover {
   filter: brightness(110%);
 }
+
 .form input,
 .form button {
   font-family: "Quicksand", sans-serif;
